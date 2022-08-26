@@ -15,16 +15,17 @@ void loop() {
   digitalWrite(capacitor,LOW);   //Initially capacitor is off
    delay(2000);                  //Wait for 2 seconds
    int volt=analogRead(A0);      //Reading the voltage from voltage sensor
-  double voltage=map(volt,0,1023,0,2500);  //Converting digital  to voltage 
-  voltage=voltage/100;            //
-   if(voltage>0.8)
-  { digitalWrite(capacitor,HIGH);
-    delay(100);
-    digitalWrite(battery,LOW);
+  double voltage=map(volt,0,1023,0,2500);  //Converting digital  to voltage × 100
+  voltage=voltage/100;            //voltage in original form
+   if(voltage>threshold)          //Condition checking for transfer of relay switch
+  { digitalWrite(capacitor,HIGH); //Using power from capacitor 
+    delay(100);                   //delay of 100ms
+    digitalWrite(battery,LOW);    //switching off supply from battery
     }
   
-  delay(1000);
-  Serial.print("Voltage across Capacitor:");
+  delay(1000);                    // wait for 1 second
+  
+  Serial.print("Voltage across Capacitor:"); //Prints voltage  across capacitors
   Serial.print(voltage);
   Serial.print("\n"); 
   
